@@ -51,7 +51,7 @@ class VannaConfig:
             # 初始化 Vanna 實例（使用 ChromaDB）
             vn_instance = MyVanna(config={
                 'api_key': api_key,
-                'model': 'gpt-3.5-turbo',  # 或 'gpt-4'
+                'model': 'gpt-4',  # 或 'gpt-4'
                 'path': './chroma_db',  # ChromaDB 資料庫路徑
                 'allow_llm_to_see_data': True  # 在配置中設置
             })

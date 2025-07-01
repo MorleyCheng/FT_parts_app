@@ -73,8 +73,8 @@ class ChatInterface:
     def _render_successful_response(self, message: Dict[str, Any]):
         """渲染成功的回應"""
         # 顯示解釋
-        if 'explanation' in message and message['explanation']:
-            st.markdown(f"**💡 解釋：** {message['explanation']}")
+        #if 'explanation' in message and message['explanation']:
+            #st.markdown(f"**💡 解釋：** {message['explanation']}")
         
         # 顯示 SQL 查詢
         if 'sql' in message and message['sql']:
