@@ -44,13 +44,13 @@ class ChatInterface:
         """顯示聊天歷史"""
         if not st.session_state.messages:
             st.markdown("""
-            ### 👋 歡迎使用配件查詢小幫手！
+            ### 👋 歡迎使用AI查詢小幫手！
             
-            我可以幫您查詢配件相關資訊。您可以用自然語言提問，例如：
+            我可以幫您查詢配件相關資訊。您可以在下方輸入框提問，例如：
             
-            - "顯示所有正在客戶維修的配件"
-            - "統計各種配件狀態的數量"
-            - "查看最近的配件變更記錄"
+            - 顯示所有正在客戶維修的配件
+            - 列出正常生產少於2的配件
+            - 查看最近的配件變更記錄
             """)
         
         # 顯示對話記錄
@@ -60,11 +60,11 @@ class ChatInterface:
     def _render_message(self, message: Dict[str, Any]):
         """渲染單個訊息"""
         if message['role'] == 'user':
-            with st.chat_message("user", avatar="👤"):
+            with st.chat_message("user"):   #with st.chat_message("user", avatar="👤"):
                 st.markdown(message['content'])
         
         elif message['role'] == 'assistant':
-            with st.chat_message("assistant", avatar="🤖"):
+            with st.chat_message("assistant"):     #with st.chat_message("assistant", avatar="🤖"):
                 if message.get('success', False):
                     self._render_successful_response(message)
                 else:
@@ -189,8 +189,8 @@ class ChatInterface:
         })
         
         # 顯示處理中狀態
-        with st.chat_message("assistant", avatar="🤖"):
-            with st.spinner("🤖 正在分析您的問題..."):
+        with st.chat_message("assistant"):
+            with st.spinner("正在分析您的問題..."):
                 # 使用 Vanna AI 處理問題
                 result = self.vanna_config.ask_question(question)
         

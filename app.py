@@ -25,7 +25,7 @@ from utils.helpers import format_dataframe, get_status_color
 
 # 頁面配置
 st.set_page_config(
-    page_title="FT配件查詢機器人",
+    page_title="FT配件查詢",
     page_icon="🤖",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -88,22 +88,31 @@ class MainApp:
             # 定義按鈕樣式
             button_style = """
             <style>
+            /* Base style for all sidebar buttons */
             .stButton > button {
                 width: 100%;
                 text-align: left;
                 margin-bottom: 1px;
-                background-color: #f0f2f6;
-                color: #333;
-                border: 0px solid #f0f2f6;
+                background-color: transparent !important; /* Ensure background is always transparent */
+                color: var(--text-color); /* Default text color from theme */
+                border: 1px solid transparent !important; /* ALWAYS transparent border */
             }
+
+            /* Style for the ACTIVE button */
+            .stButton > button[kind="primary"] {
+                color: var(--primary-color) !important; /* Active button text color */
+            }
+
+            /* Hover style for ANY button (active or not) */
             .stButton > button:hover {
-                background-color: #FF6B6B;
-                color: white;
+                color: red !important; /* On hover, all buttons get red text */
+                background-color: transparent !important; /* Explicitly keep background transparent on hover */
             }
-            .stButton > button.active {
-                background-color: #FF6B6B;
-                color: white;
-                border: 1px solid #FF6B6B;
+
+            /* Remove focus outline */
+            .stButton > button:focus {
+                outline: none !important;
+                box-shadow: none !important;
             }
             </style>
             """
@@ -112,7 +121,7 @@ class MainApp:
             # 功能按鈕
             pages = [
                 "🏠 儀表板",
-                "💬 AI查詢",
+                "🤖 AI幫你查",
                 "📊 統計分析",
                 "📋 變更紀錄",
                 "📄 報表匯出",
@@ -135,7 +144,7 @@ class MainApp:
         # 主要內容區域
         if st.session_state.current_page == "🏠 儀表板":
             self.show_dashboard()
-        elif st.session_state.current_page == "💬 AI查詢":
+        elif st.session_state.current_page == "🤖 AI幫你查":
             self.show_chat_interface()
         elif st.session_state.current_page == "📊 統計分析":
             self.show_statistics()
@@ -164,7 +173,7 @@ class MainApp:
 
     def show_dashboard(self):
         """顯示首頁儀表板"""
-        st.markdown('<h1 class="main-header">配件管理儀表板</h1>', unsafe_allow_html=True)
+        st.markdown('<h1 class="main-header">配件狀態</h1>', unsafe_allow_html=True)
         
         if not st.session_state.database_loaded:
             st.warning("⚠️ 請先確保資料庫連接正常")
@@ -264,7 +273,7 @@ class MainApp:
 
     def show_chat_interface(self):
         """顯示聊天查詢介面"""
-        st.markdown('<h1 class="main-header">💬 AI查詢小幫手</h1>', unsafe_allow_html=True)
+        st.markdown('<h1 class="main-header">🤖 AI查詢小幫手</h1>', unsafe_allow_html=True)
         
         if not st.session_state.database_loaded:
             st.warning("⚠️ 請先確保資料庫連接正常")
@@ -286,7 +295,7 @@ class MainApp:
         # 分析選項
         analysis_type = st.selectbox(
             "選擇分析類型",
-            ["配件狀態統計", "客戶別分析", "趨勢分析", "維修週期分析"]
+            ["配件狀態統計","維修週期分析"]          #先將"客戶別分析" 與 "趨勢分析" 比較無用的功能不顯示
         )
         
         if analysis_type == "配件狀態統計":
@@ -631,11 +640,11 @@ class MainApp:
         st.subheader("ℹ️ 系統資訊")
         
         system_info = {
-            "應用程式版本": "1.0.0",
+            "應用程式版本": "demo verion 2025/7/1",
             "Streamlit 版本": st.__version__,
-            "Python 版本": "3.9+",
-            "部署環境": "Streamlit Cloud",
-            "最後更新": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            "Python 版本": "3.12+",
+            "部署環境": "Streamlit Cloud"
+            #"最後更新": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         }
         
         for key, value in system_info.items():
