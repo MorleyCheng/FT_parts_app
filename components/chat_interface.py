@@ -15,7 +15,7 @@ class ChatInterface:
         
         # 初始化 Vanna AI
         if 'vanna_config' not in st.session_state:
-            with st.spinner("🤖 正在初始化 AI 查詢引擎..."):
+            with st.spinner("🦖 正在初始化 AI 查詢引擎..."):
                 st.session_state.vanna_config = VannaConfig()
         
         self.vanna_config = st.session_state.vanna_config
@@ -46,11 +46,16 @@ class ChatInterface:
             st.markdown("""
             ### 👋 歡迎使用AI查詢小幫手！
             
-            我可以幫您查詢配件相關資訊。您可以在下方輸入框提問，例如：
+            我可以幫您查詢配件相關資訊。請參考以下範例在下方輸入框提問
+                        
+            - 站點: FT1, FT2
+            - 配件種類: LB, DB, PC
+            - 配件狀態: 正常生產, 廠內維修, 客戶維修, 待release, 其它
             
+            例如：
             - 顯示所有正在客戶維修的配件
             - 列出正常生產少於2的配件
-            - 查看最近的配件變更記錄
+            - 查看最近30天的配件變更記錄
             """)
         
         # 顯示對話記錄

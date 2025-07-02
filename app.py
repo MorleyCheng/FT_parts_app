@@ -121,7 +121,7 @@ class MainApp:
             # 功能按鈕
             pages = [
                 "🏠 儀表板",
-                "🤖 AI幫你查",
+                "🦖 AI幫你查",
                 "📊 統計分析",
                 "📋 變更紀錄",
                 "📄 報表匯出",
@@ -144,7 +144,7 @@ class MainApp:
         # 主要內容區域
         if st.session_state.current_page == "🏠 儀表板":
             self.show_dashboard()
-        elif st.session_state.current_page == "🤖 AI幫你查":
+        elif st.session_state.current_page == "🦖 AI幫你查":
             self.show_chat_interface()
         elif st.session_state.current_page == "📊 統計分析":
             self.show_statistics()
@@ -273,7 +273,7 @@ class MainApp:
 
     def show_chat_interface(self):
         """顯示聊天查詢介面"""
-        st.markdown('<h1 class="main-header">🤖 AI查詢小幫手</h1>', unsafe_allow_html=True)
+        st.markdown('<h1 class="main-header">🦖 AI查詢小幫手</h1>', unsafe_allow_html=True)
         
         if not st.session_state.database_loaded:
             st.warning("⚠️ 請先確保資料庫連接正常")
@@ -586,7 +586,7 @@ class MainApp:
         st.markdown("---")
         
         # Vanna AI 設定
-        st.subheader("🤖 AI 查詢設定")
+        st.subheader("🦖 AI 查詢設定")
         
         col1, col2 = st.columns(2)
         
